@@ -1,0 +1,14 @@
+version: '2'
+services:
+    db:
+      image: postgres
+    web:
+      build: .
+      command: python manage.py runserver 0.0.0.0:${PORT}
+      env_file: .env
+      volumes:
+        - .:/code
+      ports:
+        - "${PORT}:${PORT}"
+      depends_on:
+        - db
